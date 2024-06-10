@@ -209,11 +209,11 @@ function getLocations() {
 function getLocationByName(location) {
     if (!location) return null;
 
-    const found = data.find((item) => item.location.toLowerCase() === location.toLowerCase());
+    const found = data.find(
+        (item) => item.location.toLowerCase() === location.toLowerCase()
+    );
 
     return found || {};
-
-    //we do not provide undefined data in the api routes thats why we provide a empty object
 }
 
 export { getLocationByName, getLocations };

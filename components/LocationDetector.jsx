@@ -1,12 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client'
 
-import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+'use client'
+import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const LocationDetector = () => {
-
     const [loading, setLoading] = useState(false);
 
     const searchParams = useSearchParams();
@@ -19,15 +17,14 @@ const LocationDetector = () => {
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                const { latitude, longitude } = position.coords;
-                const location = `${latitude},${longitude}`;
-                params.set('location', location);
+                params.set('latitude', position.coords.latitude);
+                params.set('longitude', position.coords.longitude);
                 setLoading(false);
                 router.push(`/current?${params.toString()}`);
-            });
+            })
         }
 
-    }, [pathName, searchParams])
+    }, [pathName, router, searchParams]);
 
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-slate-700 text-white">
@@ -45,7 +42,7 @@ const LocationDetector = () => {
                 )
             }
         </div>
-    );
-};
+    )
+}
 
 export default LocationDetector;
